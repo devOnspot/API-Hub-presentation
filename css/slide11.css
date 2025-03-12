@@ -33,7 +33,7 @@
 .timeline-nodes:before {
     content: '';
     position: absolute;
-    top: 44px;
+    top: 39px;
     left: 0;
     width: 100%;
     height: 4px;
@@ -52,6 +52,7 @@
     width: 12%;
     cursor: pointer;
     transition: all 0.3s ease;
+    -webkit-transition: all 0.3s ease;
 }
 
 /* Ponto marcador na timeline */
@@ -63,6 +64,7 @@
     border: 3px solid var(--primary);
     margin-bottom: 10px;
     transition: all 0.3s ease;
+    -webkit-transition: all 0.3s ease;
 }
 
 /* Data do nó */
@@ -82,6 +84,7 @@
     display: inline-block;
     box-shadow: 0 2px 5px rgba(0,0,0,0.05);
     transition: all 0.3s ease;
+    -webkit-transition: all 0.3s ease;
     white-space: nowrap;
 }
 
@@ -109,6 +112,7 @@
 /* Efeitos de hover e active */
 .timeline-node:hover .timeline-node-point {
     transform: scale(1.2);
+    -webkit-transform: scale(1.2);
 }
 
 .timeline-node:hover .timeline-node-label {
@@ -116,8 +120,22 @@
     color: white;
 }
 
+/* Suporte para dispositivos touch - estado active em vez de hover */
+@media (hover: none) {
+    .timeline-node:active .timeline-node-point {
+        transform: scale(1.2);
+        -webkit-transform: scale(1.2);
+    }
+    
+    .timeline-node:active .timeline-node-label {
+        background-color: var(--primary);
+        color: white;
+    }
+}
+
 .timeline-node.active .timeline-node-point {
     transform: scale(1.3);
+    -webkit-transform: scale(1.3);
 }
 
 .timeline-node.active .timeline-node-label {
@@ -154,8 +172,228 @@
     font-size: 1.1em;
 }
 
-/* Responsividade para telas menores */
-@media (max-width: 768px) {
+/* iPhone SE, 5, 5S, 5C, iPod Touch (4-inch display) */
+@media only screen 
+and (min-device-width: 320px) 
+and (max-device-width: 568px) 
+and (-webkit-min-device-pixel-ratio: 2) {
+    .project-timeline {
+        margin: 20px 0 15px 0;
+        padding: 15px 10px;
+    }
+    
+    .timeline-nodes {
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 20px 0;
+    }
+    
+    .timeline-nodes:before {
+        display: none;
+    }
+    
+    .timeline-node {
+        width: 33.33%;
+        margin-bottom: 25px;
+    }
+    
+    .timeline-node-date {
+        font-size: 11px;
+    }
+    
+    .timeline-node-label {
+        font-size: 10px;
+        padding: 3px 6px;
+    }
+    
+    .timeline-details-container {
+        padding: 15px;
+        min-height: 150px;
+    }
+    
+    .timeline-details-content h4 {
+        font-size: 1.2em;
+    }
+    
+    .timeline-details-content li {
+        font-size: 0.9em;
+        margin-bottom: 5px;
+    }
+}
+
+/* iPhone 6, 6S, 7, 8 (4.7-inch display) */
+@media only screen 
+and (min-device-width: 375px) 
+and (max-device-width: 667px) 
+and (-webkit-min-device-pixel-ratio: 2) {
+    .project-timeline {
+        margin: 30px 0 20px 0;
+        padding: 15px;
+    }
+    
+    .timeline-nodes {
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 20px 0;
+    }
+    
+    .timeline-nodes:before {
+        display: none;
+    }
+    
+    .timeline-node {
+        width: 33.33%;
+        margin-bottom: 25px;
+    }
+    
+    .timeline-node-date {
+        font-size: 12px;
+    }
+    
+    .timeline-details-content li {
+        font-size: 1em;
+    }
+}
+
+/* iPhone 6+, 7+, 8+ (5.5-inch display) */
+@media only screen 
+and (min-device-width: 414px) 
+and (max-device-width: 736px) 
+and (-webkit-min-device-pixel-ratio: 3) {
+    .timeline-node {
+        width: 33.33%;
+    }
+}
+
+/* iPhone X, XS, 11 Pro, 12 mini */
+@media only screen 
+and (min-device-width: 375px) 
+and (max-device-width: 812px) 
+and (-webkit-min-device-pixel-ratio: 3) {
+    .project-timeline {
+        margin: 30px 0 20px 0;
+        padding-bottom: env(safe-area-inset-bottom, 15px);
+    }
+}
+
+/* iPhone XR, XS Max, 11, 11 Pro Max, 12, 12 Pro, 13 */
+@media only screen 
+and (min-device-width: 390px) 
+and (max-device-width: 926px) 
+and (-webkit-min-device-pixel-ratio: 2) {
+    .timeline-node {
+        width: 25%;
+    }
+}
+
+/* iPad (todos os modelos em retrato) */
+@media only screen 
+and (min-device-width: 768px) 
+and (max-device-width: 1024px)
+and (orientation: portrait) {
+    .project-timeline {
+        margin: 40px 0 30px 0;
+    }
+    
+    .timeline-nodes {
+        padding: 30px 0 45px 0;
+    }
+    
+    .timeline-nodes:before {
+        display: block;
+    }
+    
+    .timeline-node {
+        width: 14%;
+    }
+    
+    .timeline-node-date {
+        font-size: 14px;
+    }
+    
+    .timeline-node-label {
+        font-size: 13px;
+    }
+}
+
+/* iPad Pro (11-inch and 12.9-inch) */
+@media only screen 
+and (min-device-width: 1024px) 
+and (max-device-width: 1366px) {
+    .project-timeline {
+        margin: 50px 0 40px 0;
+    }
+    
+    .timeline-node {
+        width: 12%;
+    }
+    
+    .timeline-node-date {
+        font-size: 15px;
+    }
+    
+    .timeline-node-label {
+        font-size: 14px;
+    }
+}
+
+/* Orientação paisagem em iPhones */
+@media only screen 
+and (max-device-width: 926px)
+and (orientation: landscape) {
+    .project-timeline {
+        margin: 15px 0;
+        padding: 15px;
+    }
+    
+    .timeline-nodes {
+        padding: 20px 0 30px 0;
+    }
+    
+    .timeline-nodes:before {
+        display: block;
+        top: 29px;
+    }
+    
+    .timeline-node {
+        width: 14%;
+    }
+    
+    .timeline-node-point {
+        width: 16px;
+        height: 16px;
+        border-width: 2px;
+    }
+    
+    .timeline-node-date {
+        font-size: 11px;
+        margin-bottom: 3px;
+    }
+    
+    .timeline-node-label {
+        font-size: 10px;
+        padding: 2px 6px;
+    }
+    
+    .timeline-details-container {
+        min-height: 120px;
+        padding: 15px;
+    }
+    
+    .timeline-details-content h4 {
+        font-size: 1.2em;
+        margin-bottom: 10px;
+        padding-bottom: 5px;
+    }
+    
+    .timeline-details-content li {
+        margin-bottom: 5px;
+        font-size: 0.9em;
+    }
+}
+
+/* Media query geral para tablets e telas médias */
+@media (max-width: 768px) and (min-width: 569px) {
     .timeline-nodes {
         flex-wrap: wrap;
         justify-content: center;
@@ -169,5 +407,17 @@
     .timeline-node {
         width: 25%;
         margin-bottom: 30px;
+    }
+}
+
+/* Melhoria para acessibilidade e toque */
+@media (any-pointer: coarse) {
+    .timeline-node-point {
+        width: 24px;
+        height: 24px;
+    }
+    
+    .timeline-node {
+        padding: 5px 0;
     }
 }

@@ -124,7 +124,215 @@
     z-index: 1;
 }
 
-/* Media queries para responsividade */
+/* iPhone SE, 5, 5S, 5C, iPod Touch (pequenos) */
+@media only screen 
+and (min-device-width: 320px) 
+and (max-device-width: 568px)
+and (-webkit-min-device-pixel-ratio: 2) {
+    .booking-flow-diagram {
+        margin: 10px 0;
+        padding: 10px 5px;
+    }
+    
+    .flow-block {
+        padding: 10px;
+        min-width: 120px;
+        font-size: 13px;
+    }
+    
+    .flow-row {
+        flex-direction: column;
+        margin-bottom: 15px;
+    }
+    
+    .flow-connector {
+        width: 2px;
+        height: 25px;
+        transform: rotate(90deg);
+    }
+    
+    .flow-connector::after {
+        top: -3px;
+        border-top: 4px solid transparent;
+        border-bottom: 4px solid transparent;
+        border-left: 7px solid #333;
+    }
+    
+    .routing-down, 
+    .connector-internal, 
+    .connector-external {
+        display: none;
+    }
+    
+    .flow-apis {
+        flex-direction: column;
+        gap: 15px;
+    }
+}
+
+/* iPhone 6, 6S, 7, 8, X, XS, 11 Pro, 12 mini (médios) */
+@media only screen 
+and (min-device-width: 375px) 
+and (max-device-width: 812px) {
+    .booking-flow-diagram {
+        margin: 15px 0;
+        padding: 15px 10px;
+    }
+    
+    .flow-block {
+        padding: 12px 15px;
+        min-width: 130px;
+        font-size: 14px;
+    }
+    
+    .flow-row {
+        flex-direction: column;
+        margin-bottom: 20px;
+    }
+    
+    .flow-connector {
+        width: 2px;
+        height: 30px;
+        transform: rotate(90deg);
+    }
+    
+    .routing-down, 
+    .connector-internal, 
+    .connector-external {
+        display: none;
+    }
+    
+    .flow-apis {
+        flex-direction: column;
+        gap: 20px;
+    }
+}
+
+/* iPhone 6+, 7+, 8+, XR, XS Max, 11, 11 Pro Max (maiores) */
+@media only screen 
+and (min-device-width: 414px) 
+and (max-device-width: 926px) {
+    .flow-block {
+        min-width: 140px;
+    }
+}
+
+/* iPad (todos os modelos) - modo retrato */
+@media only screen 
+and (min-device-width: 768px) 
+and (max-device-width: 1024px) 
+and (orientation: portrait) {
+    .flow-row {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+        margin-bottom: 30px;
+    }
+    
+    .flow-block {
+        margin: 10px 0;
+        min-width: 130px;
+    }
+    
+    .flow-connector {
+        width: 30px;
+        height: 2px;
+        transform: none;
+    }
+    
+    /* Adaptação para quando o fluxo precisa quebrar linha no iPad */
+    @supports (display: grid) {
+        .flow-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            grid-gap: 15px;
+            justify-items: center;
+        }
+        
+        .flow-connector {
+            display: none;
+        }
+    }
+    
+    .flow-apis {
+        flex-direction: row;
+        gap: 30px;
+    }
+    
+    /* Adaptações para conectores em iPads */
+    .connector-internal, 
+    .connector-external {
+        height: 40px;
+        top: -40px;
+    }
+    
+    .routing-down {
+        height: 40px;
+        bottom: -40px;
+    }
+}
+
+/* iPad Pro (11-inch and 12.9-inch) */
+@media only screen 
+and (min-device-width: 1024px) 
+and (max-device-width: 1366px) {
+    .flow-row {
+        max-width: 900px;
+        margin-bottom: 40px;
+    }
+    
+    .flow-apis {
+        max-width: 750px;
+        gap: 40px;
+    }
+    
+    .flow-connector {
+        width: 40px;
+    }
+}
+
+/* Orientação paisagem em iPhones */
+@media only screen 
+and (max-device-width: 926px)
+and (orientation: landscape) {
+    .booking-flow-diagram {
+        margin: 10px 0;
+    }
+    
+    .flow-row {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 15px;
+        margin-bottom: 20px;
+    }
+    
+    .flow-block {
+        padding: 10px;
+        min-width: 120px;
+        font-size: 13px;
+    }
+    
+    .flow-connector {
+        width: 25px;
+        height: 2px;
+        transform: none;
+    }
+    
+    .flow-apis {
+        flex-direction: row;
+        gap: 25px;
+    }
+    
+    /* Oculta conectores complexos em modo paisagem */
+    .routing-down, 
+    .connector-internal, 
+    .connector-external {
+        display: none;
+    }
+}
+
+/* Media query geral para outros dispositivos móveis */
 @media (max-width: 768px) {
     .flow-row {
         flex-direction: column;

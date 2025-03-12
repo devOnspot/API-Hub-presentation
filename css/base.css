@@ -14,20 +14,23 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent; /* Remove highlight tap em dispositivos iOS */
 }
 
 body {
-    font-family: 'Roboto', sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, 'Roboto', sans-serif; /* Usa fontes do sistema iOS */
     background-color: #f5f5f5;
     color: var(--dark);
-    line-height: 1.6;
+    line-height: 1.2;
     overflow: hidden; /* Previne rolagem da página */
+    -webkit-font-smoothing: antialiased; /* Melhora renderização de fontes no Safari */
+    -moz-osx-font-smoothing: grayscale;
 }
 
 /* Contador de slides */
 .slide-indicator {
     position: fixed;
-    bottom: 20px;
+    bottom: env(safe-area-inset-bottom, 20px); /* Suporte para notch em iPhones */
     left: 20px;
     background-color: rgba(0, 0, 0, 0.7);
     color: white;
@@ -40,12 +43,14 @@ body {
 .slides-container {
     width: 100vw;
     height: 100vh;
+    height: calc(100vh - env(safe-area-inset-top) - env(safe-area-inset-bottom)); /* Ajuste para notch */
     overflow: hidden;
 }
 
 .slides {
     display: flex;
     transition: transform var(--transition-speed) ease;
+    -webkit-transition: transform var(--transition-speed) ease; /* Safari */
     height: 100%;
 }
 
@@ -54,18 +59,21 @@ body {
     flex: 0 0 100%;
     width: 100vw;
     height: 100vh;
+    height: calc(100vh - env(safe-area-inset-top) - env(safe-area-inset-bottom)); /* Ajuste para notch */
     padding: 50px;
     position: relative;
     background-color: white;
-    overflow: hidden; /* Mantém o conteúdo dentro dos limites do slide */
+    overflow: hidden;
+    touch-action: pan-y; /* Melhora desempenho de scroll */
 }
 
 .slide-content {
     max-width: 1200px;
     margin: 0 auto;
     height: 100%;
-    max-height: calc(100vh - 100px); /* Garante espaço para a navegação */
-    overflow-y: auto; /* Permite rolagem vertical dentro do slide */
+    max-height: calc(100vh - 100px - env(safe-area-inset-top) - env(safe-area-inset-bottom));
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch; /* Scroll suave em iOS */
     scrollbar-width: thin;
 }
 
@@ -93,16 +101,16 @@ body {
 
 /* Tipografia */
 h1 {
-    font-size: 2.5em;
+    font-size: 2em;
     color: var(--primary);
-    margin-bottom: 20px;
+    margin-bottom: 15px;
 }
 
 h2 {
-    font-size: 2em;
+    font-size: 1.5em;
     color: var(--primary);
-    margin-bottom: 20px;
-    margin-top: 40px;
+    margin-bottom: 15px;
+    margin-top: 30px;
 }
 
 h3 {
@@ -129,7 +137,7 @@ li {
 /* Botões de navegação */
 .nav-buttons {
     position: fixed;
-    bottom: 20px;
+    bottom: env(safe-area-inset-bottom, 20px); /* Ajuste para notch */
     right: 20px;
     display: flex;
     gap: 10px;
@@ -145,6 +153,8 @@ li {
     cursor: pointer;
     font-size: 16px;
     transition: background-color 0.3s;
+    -webkit-appearance: none; /* Corrige visual de botões no iOS */
+    -webkit-transition: background-color 0.3s;
 }
 
 .btn:hover {
@@ -154,6 +164,13 @@ li {
 .btn:disabled {
     background-color: #cccccc;
     cursor: not-allowed;
+}
+
+/* Corrige o problema do toque duplo em dispositivos iOS */
+@media (hover: none) {
+    .btn:active {
+        background-color: #3367d6;
+    }
 }
 
 /* Layout auxiliar */
@@ -188,6 +205,7 @@ li {
 .code-scroll-container {
     max-height: 350px;
     overflow-y: auto;
+    -webkit-overflow-scrolling: touch; /* Scroll suave em iOS */
     border-radius: 5px;
     scrollbar-width: thin;
 }
@@ -210,7 +228,7 @@ li {
     background-color: #f0f0f0;
     padding: 15px;
     border-radius: 5px;
-    font-family: monospace;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, monospace; /* Fontes mono melhores para dispositivos Apple */
     font-size: 14px;
     margin: 0;
     border-left: 4px solid var(--primary);
@@ -226,6 +244,7 @@ li {
 
 .fade-in {
     animation: fadeIn 1s;
+    -webkit-animation: fadeIn 1s;
 }
 
 /* Containers com sombra e bordas */
@@ -237,7 +256,154 @@ li {
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Media queries para responsividade */
+/* Media queries para dispositivos Apple */
+
+/* iPhone SE, 5, 5S, 5C, iPod Touch (4-inch display) */
+@media only screen 
+and (min-device-width: 320px) 
+and (max-device-width: 568px)
+and (-webkit-min-device-pixel-ratio: 2) {
+    .slide {
+        padding: 20px 15px;
+    }
+    
+    h1 {
+        font-size: 1.8em;
+    }
+    
+    h2 {
+        font-size: 1.5em;
+    }
+    
+    h3 {
+        font-size: 1.3em;
+    }
+    
+    p, li {
+        font-size: 1em;
+    }
+    
+    .btn {
+        padding: 8px 16px;
+        font-size: 14px;
+    }
+}
+
+/* iPhone 6, 6S, 7, 8 (4.7-inch display) */
+@media only screen 
+and (min-device-width: 375px) 
+and (max-device-width: 667px) 
+and (-webkit-min-device-pixel-ratio: 2) {
+    .slide {
+        padding: 25px 15px;
+    }
+}
+
+/* iPhone 6+, 7+, 8+ (5.5-inch display) */
+@media only screen 
+and (min-device-width: 414px) 
+and (max-device-width: 736px) 
+and (-webkit-min-device-pixel-ratio: 3) {
+    .slide {
+        padding: 30px 20px;
+    }
+}
+
+/* iPhone X, XS, 11 Pro, 12 mini */
+@media only screen 
+and (min-device-width: 375px) 
+and (max-device-width: 812px) 
+and (-webkit-min-device-pixel-ratio: 3) {
+    .nav-buttons {
+        bottom: calc(env(safe-area-inset-bottom) + 10px);
+    }
+    
+    .slide-indicator {
+        bottom: calc(env(safe-area-inset-bottom) + 10px);
+    }
+}
+
+/* iPhone XR, XS Max, 11, 11 Pro Max */
+@media only screen 
+and (min-device-width: 414px) 
+and (max-device-width: 896px) 
+and (-webkit-min-device-pixel-ratio: 2) {
+    .slide {
+        padding: 30px 20px;
+    }
+}
+
+/* iPhone 12, 12 Pro, 13, 13 Pro */
+@media only screen 
+and (min-device-width: 390px) 
+and (max-device-width: 844px) 
+and (-webkit-min-device-pixel-ratio: 3) {
+    .slide {
+        padding: 30px 20px;
+    }
+}
+
+/* iPhone 12 Pro Max, 13 Pro Max */
+@media only screen 
+and (min-device-width: 428px) 
+and (max-device-width: 926px) 
+and (-webkit-min-device-pixel-ratio: 3) {
+    .slide {
+        padding: 35px 20px;
+    }
+}
+
+/* iPad (all models) */
+@media only screen 
+and (min-device-width: 768px) 
+and (max-device-width: 1024px) {
+    .slide {
+        padding: 40px 30px;
+    }
+    
+    h1 {
+        font-size: 2.8em;
+    }
+    
+    h2 {
+        font-size: 2.3em;
+    }
+    
+    h3 {
+        font-size: 1.8em;
+    }
+    
+    .code-scroll-container {
+        max-height: 450px;
+    }
+    
+    .flex-container {
+        gap: 40px;
+    }
+}
+
+/* iPad Pro (11-inch and 12.9-inch) */
+@media only screen 
+and (min-device-width: 1024px) 
+and (max-device-width: 1366px) {
+    .slide {
+        padding: 50px 40px;
+    }
+    
+    h1 {
+        font-size: 3em;
+    }
+    
+    h2 {
+        font-size: 2.5em;
+    }
+    
+    .code-scroll-container {
+        max-height: 550px;
+    }
+}
+
+/* Ajuste geral para dispositivos móveis */
 @media (max-width: 768px) {
     .flex-container {
         flex-direction: column;
@@ -246,16 +412,31 @@ li {
     .column {
         margin-bottom: 30px;
     }
-    
+}
+
+/* Suporte para orientação paisagem em dispositivos móveis */
+@media (max-height: 500px) and (orientation: landscape) {
     .slide {
-        padding: 30px 15px;
+        padding: 15px;
     }
     
     h1 {
-        font-size: 2em;
+        font-size: 1.8em;
+        margin-bottom: 10px;
     }
     
     h2 {
-        font-size: 1.7em;
+        font-size: 1.5em;
+        margin-bottom: 10px;
+        margin-top: 20px;
+    }
+    
+    h3 {
+        font-size: 1.3em;
+        margin-bottom: 8px;
+    }
+    
+    p, li {
+        margin-bottom: 8px;
     }
 }
