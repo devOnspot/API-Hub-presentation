@@ -1,0 +1,154 @@
+/* Estilos para o slide 7 - Fluxo do Sistema de Reservas */
+
+/* Container para o diagrama de fluxo */
+.booking-flow-diagram {
+    margin: 30px 0;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Estilo para o fluxo principal horizontal */
+.flow-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 50px;
+    position: relative;
+    width: 100%;
+    max-width: 1000px;
+}
+
+/* Estilo para o fluxo secundário (APIs) */
+.flow-apis {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    position: relative;
+    width: 100%;
+    max-width: 800px;
+}
+
+/* Estilo para os blocos do processo */
+.flow-block {
+    background-color: #4285f4;
+    color: white;
+    padding: 15px 20px;
+    border-radius: 8px;
+    text-align: center;
+    min-width: 150px;
+    font-weight: bold;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    position: relative;
+    z-index: 2;
+}
+
+/* Variações de cor para os blocos */
+.flow-block.primary {
+    background-color: #4285f4;
+    opacity: 0.9;
+}
+
+.flow-block.secondary {
+    background-color: #4285f4;
+    opacity: 0.8;
+}
+
+.flow-block.internal-api {
+    background-color: #0F9D58;
+    opacity: 0.9;
+}
+
+.flow-block.external-api {
+    background-color: #DB4437;
+    opacity: 0.9;
+}
+
+/* Conectores horizontais com setas */
+.flow-connector {
+    height: 2px;
+    background-color: #333;
+    width: 50px;
+    position: relative;
+    z-index: 1;
+}
+
+/* Seta para o conector */
+.flow-connector::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: -4px;
+    width: 0;
+    height: 0;
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+    border-left: 10px solid #333;
+}
+
+/* Conectores verticais */
+.api-connector {
+    position: absolute;
+    background-color: #333;
+    z-index: 1;
+}
+
+/* Conector vertical para a API interna */
+.connector-internal {
+    width: 3px;
+    height: 50px;
+    top: -50px;
+    left: 80%;
+    transform: translateX(-50%);
+}
+
+/* Conector vertical para a API externa */
+.connector-external {
+    width: 3px;
+    height: 50px;
+    top: -50px;
+    left: 10%;
+    transform: translateX(-50%);
+}
+
+/* Conector vertical do roteamento */
+.routing-down {
+    position: absolute;
+    width: 2px;
+    height: 50px;
+    background-color: #333;
+    bottom: -50px;
+    left: 100%;
+    transform: translateX(-50%);
+    z-index: 1;
+}
+
+/* Media queries para responsividade */
+@media (max-width: 768px) {
+    .flow-row {
+        flex-direction: column;
+        margin-bottom: 20px;
+    }
+
+    .flow-block {
+        margin: 10px 0;
+    }
+
+    .flow-connector {
+        width: 2px;
+        height: 30px;
+        transform: rotate(90deg);
+    }
+
+    .routing-down, 
+    .connector-internal, 
+    .connector-external {
+        display: none;
+    }
+
+    .flow-apis {
+        flex-direction: column;
+        gap: 20px;
+    }
+}

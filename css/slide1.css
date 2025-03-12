@@ -1,0 +1,60 @@
+/* Estilos para o slide 1 - Introdução/Título */
+
+/* Estilos para as logos */
+.logos-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 80px;
+    padding: 20px;
+    width: 100%;
+}
+
+.logo-left {
+    text-align: left;
+}
+
+.logo-right {
+    text-align: right;
+}
+
+.logo {
+    max-width: 200px;
+    height: auto;
+}
+
+/* Estilo específico para a data no slide de título */
+.date {
+    margin-top: 2em;
+    font-style: italic;
+    color: var(--secondary);
+}
+
+/* Ajustes específicos para o título principal */
+.slide1 h1 {
+    font-size: 3em;
+    letter-spacing: 0.5px;
+    margin-bottom: 30px;
+}
+
+.slide1 h3 {
+    color: var(--secondary);
+    margin-bottom: 40px;
+    font-weight: 400;
+    max-width: 800px;
+}
+
+/* Responsividade para o slide de título */
+@media (max-width: 768px) {
+    .logos-container {
+        margin-bottom: 40px;
+    }
+    
+    .logo {
+        max-width: 150px;
+    }
+    
+    .slide1 h1 {
+        font-size: 2.5em;
+    }
+}

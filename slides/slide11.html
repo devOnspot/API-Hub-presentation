@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Retrospective and Next Steps</title>
+
+        <link rel="stylesheet" href="../css/slide11.css">
+    </head>
+    <body>
+        <div class="slide-content">
+            <h2>Retrospective and Next Steps</h2>
+
+            <!-- Timeline component - Horizontal with improved style -->
+            <div class="project-timeline">
+                <div class="timeline-nodes">
+                    <div
+                        class="timeline-node completed"
+                        onclick="showTimelineDetails('nov')"
+                    >
+                        <div class="timeline-node-point"></div>
+                        <div class="timeline-node-date">Nov 2024</div>
+                        <div class="timeline-node-label">Project Start</div>
+                    </div>
+
+                    <div
+                        class="timeline-node completed"
+                        onclick="showTimelineDetails('dez')"
+                    >
+                        <div class="timeline-node-point"></div>
+                        <div class="timeline-node-date">Dec 2024</div>
+                        <div class="timeline-node-label">Data Modeling</div>
+                    </div>
+
+                    <div
+                        class="timeline-node completed"
+                        onclick="showTimelineDetails('jan')"
+                    >
+                        <div class="timeline-node-point"></div>
+                        <div class="timeline-node-date">Jan 2025</div>
+                        <div class="timeline-node-label">Listing API</div>
+                    </div>
+
+                    <div
+                        class="timeline-node completed"
+                        onclick="showTimelineDetails('fev')"
+                    >
+                        <div class="timeline-node-point"></div>
+                        <div class="timeline-node-date">Feb 2025</div>
+                        <div class="timeline-node-label">Booking System</div>
+                    </div>
+
+                    <div
+                        class="timeline-node current"
+                        onclick="showTimelineDetails('mar')"
+                    >
+                        <div class="timeline-node-point"></div>
+                        <div class="timeline-node-date">Mar 2025</div>
+                        <div class="timeline-node-label">
+                            Tests and Refinements
+                        </div>
+                    </div>
+
+                    <div
+                        class="timeline-node future"
+                        onclick="showTimelineDetails('abr')"
+                    >
+                        <div class="timeline-node-point"></div>
+                        <div class="timeline-node-date">Apr 2025</div>
+                        <div class="timeline-node-label">
+                            Optimization and Caching
+                        </div>
+                    </div>
+
+                    <div
+                        class="timeline-node future"
+                        onclick="showTimelineDetails('mai')"
+                    >
+                        <div class="timeline-node-point"></div>
+                        <div class="timeline-node-date">May 2025</div>
+                        <div class="timeline-node-label">
+                            Provider Expansion
+                        </div>
+                    </div>
+
+                    <div
+                        class="timeline-node future"
+                        onclick="showTimelineDetails('jun')"
+                    >
+                        <div class="timeline-node-point"></div>
+                        <div class="timeline-node-date">Jun 2025</div>
+                        <div class="timeline-node-label">Analytics</div>
+                    </div>
+                </div>
+            </div>
+
+            <div
+                class="timeline-details-container"
+                id="timelineDetailsContainer"
+            >
+                <!-- Content will be inserted via JavaScript -->
+            </div>
+
+            <h3>Focus for Next Sprints</h3>
+            <ul>
+                <li>Performance optimization and caching strategies</li>
+                <li>Integration with other tourism experience providers</li>
+                <li>UI improvements to use provider-specific features</li>
+                <li>Monitoring system and conversion analysis</li>
+                <li>Implementation of real-time notifications for bookings</li>
+            </ul>
+        </div>
+
+        <!-- Specific script for the timeline -->
+        <script src="../js/timeline.js"></script>
+    </body>
+</html>

@@ -1,0 +1,88 @@
+<div class="slide-content">
+    <h2>FareHarbor Data Model</h2>
+    <div class="data-model">
+        <div class="flex-container">
+            <div class="column">
+                <h3>Main Entities</h3>
+                <ul>
+                    <li><strong>Item</strong>: Product/experience</li>
+                    <li><strong>Availability</strong>: Available times</li>
+                    <li>
+                        <strong>Customer Type Rate</strong>: Ticket types
+                    </li>
+                    <li>
+                        <strong>Custom Field</strong>: Custom fields
+                    </li>
+                    <li><strong>Booking</strong>: Complete reservation</li>
+                </ul>
+            </div>
+            <div class="column">
+                <h3>Specific Fields</h3>
+                <ul>
+                    <li><strong>pk/code</strong>: Unique identifiers</li>
+                    <li>
+                        <strong>customer_prototype</strong>: Price template
+                    </li>
+                    <li>
+                        <strong>custom_field_instances</strong>: Specific
+                        options
+                    </li>
+                    <li>
+                        <strong>total_including_tax</strong>: Prices with tax
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="code-example-container">
+            <h3>JSON Structure Example</h3>
+            <div class="code-scroll-container">
+                <pre
+                    class="code-block"
+                >
+{
+    "id": "1715186678982x526868045383634300",
+    "texts": [
+        {
+            "language": "fr",
+            "name": "Ultimate Los Angeles Experience  Privatif   6 pax",
+            "description": "Votre « boutique Tour» de Los Angeles privé et personnalisé! \n\nLights, Camera, Action! Vous l'avez tant regardée dans vos séries télévisées favorites et la voici aujourd'hui qui s'offre à vous, veinards! L.A vous réserve bien des surprises! Vous découvrirez tout d'abord le quartier du Downtown Los Angeles où architectures modernes et anciennes se cotoient du côté d'El Pueblo (la place où se trouve la toute première maison de l'histoire de la ville de Los Angeles). Ensuite, cap sur Hollywood, où tout n'est que strass et paillettes sur son célèbre Walk of Fame (le boulevard aux étoiles) ainsi qu'aux abords du Chinese Theater et ses mythiques empreintes de stars, sans oublier le Dolby Theater (anciennement « Kodak Theater»), lieu où est présenté, chaque année, la cérémonie des Oscars. Vous remonterez, ensuite par Sunset Boulevard (le fameux Sunset Strip) puis le quartier de Beverly Hills et la mythique artère Rodeo Drive. Enfin, le tour vous emmène du côté des plages et du Pacifique, avec Santa Monica et/ou le typique quartier de Venice Beach.\n\nIl s'agit de l'expérience parfaite pour une initiation à cette ville trépidante. Ce tour est vivement conseillé à votre arrivée dans la « Cité des Anges». Nos guides francophones, passionnés par la ville, partagent un grand nombre d'informations utiles pour mieux vous repérer et optimiser votre temps dans l'immensité Angeline! Listez les lieux qui vous font rêver ou laissez-vous suggérer nos petites adresses atypiques pour une expérience hors des routes touristiques.\n\n***INFOS***\n\n- Horaires: 8:00 ou 14:00\n- Lieu de rendez-vous: votre hôtel pour les zones suivantes: Beverly Hills / West Hollywood / Hollywood / Downtown / LAX Hotels / Culver City / Beach Cities (Venice, Santa Monica, Marina Del Rey). \n\n<b>Si un hôtel est hors zone, un supplément de $150 est à régler au moment de la commande.</b>\n\n- Tour en Français ou Anglais\n- Confirmation obligatoire 24h en avance à hello@cali-fun.com\n- Pourboire du guide non-inclus ($15/personne conseillé)."
+        },
+        {
+            "language": "en",
+            "name": "Ultimate Los Angeles Experience  Privatif   6 pax",
+            "description": "Votre « boutique Tour» de Los Angeles privé et personnalisé! \n\nLights, Camera, Action! Vous l'avez tant regardée dans vos séries télévisées favorites et la voici aujourd'hui qui s'offre à vous, veinards! L.A vous réserve bien des surprises! Vous découvrirez tout d'abord le quartier du Downtown Los Angeles où architectures modernes et anciennes se cotoient du côté d'El Pueblo (la place où se trouve la toute première maison de l'histoire de la ville de Los Angeles). Ensuite, cap sur Hollywood, où tout n'est que strass et paillettes sur son célèbre Walk of Fame (le boulevard aux étoiles) ainsi qu'aux abords du Chinese Theater et ses mythiques empreintes de stars, sans oublier le Dolby Theater (anciennement « Kodak Theater»), lieu où est présenté, chaque année, la cérémonie des Oscars. Vous remonterez, ensuite par Sunset Boulevard (le fameux Sunset Strip) puis le quartier de Beverly Hills et la mythique artère Rodeo Drive. Enfin, le tour vous emmène du côté des plages et du Pacifique, avec Santa Monica et/ou le typique quartier de Venice Beach.\n\nIl s'agit de l'expérience parfaite pour une initiation à cette ville trépidante. Ce tour est vivement conseillé à votre arrivée dans la « Cité des Anges». Nos guides francophones, passionnés par la ville, partagent un grand nombre d'informations utiles pour mieux vous repérer et optimiser votre temps dans l'immensité Angeline! Listez les lieux qui vous font rêver ou laissez-vous suggérer nos petites adresses atypiques pour une expérience hors des routes touristiques.\n\n***INFOS***\n\n- Horaires: 8:00 ou 14:00\n- Lieu de rendez-vous: votre hôtel pour les zones suivantes: Beverly Hills / West Hollywood / Hollywood / Downtown / LAX Hotels / Culver City / Beach Cities (Venice, Santa Monica, Marina Del Rey). \n\n<b>Si un hôtel est hors zone, un supplément de $150 est à régler au moment de la commande.</b>\n\n- Tour en Français ou Anglais\n- Confirmation obligatoire 24h en avance à hello@cali-fun.com\n- Pourboire du guide non-inclus ($15/personne conseillé)."
+        }
+    ],
+    "child_maximum_age": 12,
+    "child_free_max_age": 0,
+    "duration": "04:00",
+    "days_to_cancel": 7,
+    "max_participants": 11,
+    "min_participants": 1,
+    "location": {
+        "maps_address": "106 W 1st St, Los Angeles, CA 90012, USA",
+        "city": "Los Angeles",
+        "state": "California",
+        "country": "United States",
+        "lat": "34.0522",
+        "lng": "-118.2437"
+    },
+    "display_price": [
+        {
+            "display_name": "Group",
+            "note": "",
+            "price": "990"
+        }
+    ],
+    "images": [
+        {
+            "thumbnail_url": "https:https://2489328c41e67522dee44336cab89bf3.cdn.bubble.io/f1720875314732x618781246540221800/Ultimate%252BLos%252BAngeles%252BExperience%252B-%252BPrivatif%252B%252F%252B%252B%252B6%252Bpax_thumb.jpg"
+        }
+    ]
+}</pre
+                >
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,69 @@
+<div class="slide-content">
+    <h2>Solution Architecture</h2>
+    
+    <div class="architecture-diagram">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400">
+            <!-- Background -->
+            <rect width="800" height="400" fill="#f8f9fa" rx="10" ry="10"/>
+            
+            <!-- Arrowhead marker (moved to the beginning to ensure availability) -->
+            <defs>
+                <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                    <polygon points="0 0, 10 3.5, 0 7" fill="#333"/>
+                </marker>
+            </defs>
+            
+            <!-- Client Box -->
+            <rect x="50" y="50" width="150" height="70" fill="#4285f4" rx="5" ry="5"/>
+            <text x="125" y="85" text-anchor="middle" fill="white" font-weight="bold">Client</text>
+            
+            <!-- API Gateway Box -->
+            <rect x="325" y="50" width="150" height="70" fill="#4285f4" rx="5" ry="5"/>
+            <text x="400" y="85" text-anchor="middle" fill="white" font-weight="bold">API Hub</text>
+            
+            <!-- Internal API Box -->
+            <rect x="200" y="200" width="150" height="70" fill="#0F9D58" rx="5" ry="5"/>
+            <text x="275" y="235" text-anchor="middle" fill="white" font-weight="bold">Internal API</text>
+            
+            <!-- FareHarbor API Box -->
+            <rect x="450" y="200" width="150" height="70" fill="#DB4437" rx="5" ry="5"/>
+            <text x="525" y="235" text-anchor="middle" fill="white" font-weight="bold">FareHarbor API</text>
+            
+            <!-- Database Box -->
+            <rect x="325" y="325" width="150" height="70" fill="#F4B400" rx="5" ry="5"/>
+            <text x="400" y="360" text-anchor="middle" fill="white" font-weight="bold">Califun Plataform</text>
+            
+            <!-- Arrows - Corrected and repositioned -->
+            <!-- Client to API Hub -->
+            <line x1="200" y1="85" x2="325" y2="85" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)"/>
+            
+            <!-- API Hub to APIs -->
+            <line x1="400" y1="120" x2="400" y2="150" stroke="#333" stroke-width="2"/>
+            <line x1="400" y1="150" x2="275" y2="200" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)"/>
+            <line x1="400" y1="150" x2="525" y2="200" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)"/>
+            
+            <!-- Internal API to Database -->
+            <line x1="275" y1="270" x2="275" y2="360" stroke="#333" stroke-width="2"/>
+            <line x1="275" y1="360" x2="325" y2="360" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)"/>
+            
+            <!-- FareHarbor API to Database -->
+            <line x1="525" y1="270" x2="525" y2="360" stroke="#333" stroke-width="2"/>
+            <line x1="525" y1="360" x2="475" y2="360" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)"/>
+            
+            <!-- Labels - Repositioned to avoid overlaps -->
+            <text x="260" y="65" text-anchor="middle">Request</text>
+            <text x="225" y="175" text-anchor="middle" transform="rotate(-30 225,175)">Internal Products</text>
+            <text x="580" y="175" text-anchor="middle" transform="rotate(30 580,175)">External Products</text>
+        </svg>
+    </div>
+    
+    <div class="architecture-description">
+        <p>The implemented architecture allows transparent communication between our systems and the FareHarbor API, offering:</p>
+        <ul>
+            <li>Abstraction of complexity for the end client</li>
+            <li>Parallel processing of internal and external products</li>
+            <li>Unified data persistence</li>
+            <li>Scalability and resilience</li>
+        </ul>
+    </div>
+</div>

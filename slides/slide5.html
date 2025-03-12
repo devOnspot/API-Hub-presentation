@@ -1,0 +1,62 @@
+<div class="slide-content">
+    <h2>Unified Data Model</h2>
+    
+    <div class="data-model">
+        <h3>Interface IOctoProductDetails</h3>
+        <div class="code-example-container">
+            <div class="code-scroll-container">
+                <pre class="code-block">
+interface IOctoProductDetails {
+  id: string;
+  fareharbor_experience_id: number | null;
+  fareharbor_company: string | null;
+  texts: { language: string; name: string; description: string }[];
+  location: { 
+    address: string; 
+    city: string; 
+    state: string;
+    country: string;
+    lat: string;
+    lng: string;
+  };
+  availabilities: {
+    start_at: string;
+    end_at: string;
+    capacity: number;
+    customer_type_rates: {
+      pk: number;
+      capacity: number;
+      customer_type: { 
+        pk: number;
+        name: string;
+      };
+      customer_prototype: { 
+        pk: number;
+        total: string;
+        total_including_tax: string;
+      };
+      custom_options_service: [
+        {
+          pk: number;
+          name: string;
+          description: string;
+          price: string;
+        }
+      ];
+    }[];
+  }[];
+}</pre>
+            </div>
+        </div>
+        
+        <div class="integration-description">
+            <h3>Benefits of the Unified Model</h3>
+            <ul>
+                <li><strong>Consistency:</strong> Uniform handling of proprietary and external products</li>
+                <li><strong>Simplicity:</strong> Single interface for the client, regardless of source</li>
+                <li><strong>Flexibility:</strong> Easy expansion to support other providers</li>
+                <li><strong>Maintenance:</strong> Centralization of transformation logic</li>
+            </ul>
+        </div>
+    </div>
+</div>

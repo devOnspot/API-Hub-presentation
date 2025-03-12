@@ -1,0 +1,80 @@
+<div class="slide-content">
+    <h2>Implementation - Listing and Availability</h2>
+    
+    <div class="implementation-container">
+        <div class="flex-container">
+            <div class="column">
+                <h3>Processing Flow</h3>
+                <ol class="process-steps">
+                    <li>
+                        <span class="step-number">1</span>
+                        <span class="step-content">
+                            <strong>Source identification</strong>
+                            <p>Automatic detection of product origin (internal or FareHarbor)</p>
+                        </span>
+                    </li>
+                    <li>
+                        <span class="step-number">2</span>
+                        <span class="step-content">
+                            <strong>Data query</strong>
+                            <p>Asynchronous request to the corresponding API</p>
+                        </span>
+                    </li>
+                    <li>
+                        <span class="step-number">3</span>
+                        <span class="step-content">
+                            <strong>Format transformation</strong>
+                            <p>Conversion to unified data model</p>
+                        </span>
+                    </li>
+                    <li>
+                        <span class="step-number">4</span>
+                        <span class="step-content">
+                            <strong>Application of business rules</strong>
+                            <p>Calculation of prices and additional fees</p>
+                        </span>
+                    </li>
+                    <li>
+                        <span class="step-number">5</span>
+                        <span class="step-content">
+                            <strong>Unified response</strong>
+                            <p>Return of standardized data to the client</p>
+                        </span>
+                    </li>
+                </ol>
+            </div>
+            <div class="column">
+                <h3>Example Code - Price Conversion</h3>
+                <div class="code-example-container">
+                    <div class="code-scroll-container">
+                        <pre class="code-block">
+// Calculate price using the calculatePrice function
+const calculatedPrice = priceCalculator.calculatePrice(
+    servicePrototype.total_including_tax || 0,
+    profitRate
+);
+
+// Round up and convert to number
+const finalPrice = calculatedPrice.ceil().toNumber();
+
+// Apply specific business rules
+if (isHighSeason && !discount.applied) {
+    // Apply high season rate
+    return applySeasonalRate(finalPrice);
+}
+
+// Conversion to unified response format
+return {
+    id: generateUniqueId(),
+    price: finalPrice,
+    currency: "USD",
+    priceFormatted: `$${finalPrice}`,
+    originalPrice: servicePrototype.total_including_tax,
+    taxIncluded: true
+};</pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

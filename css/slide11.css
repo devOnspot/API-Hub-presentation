@@ -1,0 +1,173 @@
+/* Estilos para o slide 11 - Timeline e Próximos Passos */
+
+/* Correção para a visualização da timeline conforme imagem */
+.slide11 h2 {
+    color: #4285f4;
+    margin-bottom: 30px;
+}
+
+/* Container para o timeline e conteúdo */
+.slide11 .Tests-and-Refinements {
+    margin-top: 20px;
+}
+
+/* Estilo base para a timeline */
+.project-timeline {
+    position: relative;
+    margin: 50px 0 30px 0;
+    background-color: white;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+/* Linha base horizontal */
+.timeline-nodes {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    padding: 30px 0 50px 0;
+}
+
+/* Linha do tempo horizontal */
+.timeline-nodes:before {
+    content: '';
+    position: absolute;
+    top: 44px;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background-color: var(--primary);
+    z-index: 1;
+}
+
+/* Cada nó na timeline */
+.timeline-node {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 12%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+/* Ponto marcador na timeline */
+.timeline-node-point {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: white;
+    border: 3px solid var(--primary);
+    margin-bottom: 10px;
+    transition: all 0.3s ease;
+}
+
+/* Data do nó */
+.timeline-node-date {
+    font-size: 13px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: var(--secondary);
+}
+
+/* Rótulo do nó */
+.timeline-node-label {
+    font-size: 12px;
+    background-color: white;
+    padding: 4px 8px;
+    border-radius: 12px;
+    display: inline-block;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+/* Estilos para os diferentes estados dos nós */
+.timeline-node.completed .timeline-node-point {
+    background-color: var(--primary);
+}
+
+.timeline-node.current .timeline-node-point {
+    background-color: var(--accent);
+    border-color: var(--accent);
+    box-shadow: 0 0 10px var(--accent);
+}
+
+.timeline-node.current .timeline-node-label {
+    background-color: var(--accent);
+    color: white;
+    font-weight: bold;
+}
+
+.timeline-node.future .timeline-node-point {
+    border-color: #aaa;
+}
+
+/* Efeitos de hover e active */
+.timeline-node:hover .timeline-node-point {
+    transform: scale(1.2);
+}
+
+.timeline-node:hover .timeline-node-label {
+    background-color: var(--primary);
+    color: white;
+}
+
+.timeline-node.active .timeline-node-point {
+    transform: scale(1.3);
+}
+
+.timeline-node.active .timeline-node-label {
+    background-color: var(--primary);
+    color: white;
+    font-weight: bold;
+}
+
+/* Container de detalhes */
+.timeline-details-container {
+    background-color: white;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 20px 0;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    min-height: 200px;
+}
+
+.timeline-details-content h4 {
+    color: var(--primary);
+    margin-top: 0;
+    border-bottom: 2px solid var(--primary);
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+    font-size: 1.5em;
+}
+
+.timeline-details-content ul {
+    padding-left: 20px;
+}
+
+.timeline-details-content li {
+    margin-bottom: 8px;
+    font-size: 1.1em;
+}
+
+/* Responsividade para telas menores */
+@media (max-width: 768px) {
+    .timeline-nodes {
+        flex-wrap: wrap;
+        justify-content: center;
+        padding-bottom: 20px;
+    }
+    
+    .timeline-nodes:before {
+        display: none;
+    }
+    
+    .timeline-node {
+        width: 25%;
+        margin-bottom: 30px;
+    }
+}

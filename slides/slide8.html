@@ -1,0 +1,136 @@
+<div class="slide-content">
+    <h2>Tratamento de Erros e Resiliência</h2>
+
+    <div class="implementation-container">
+        <div class="flex-container">
+            <div class="column">
+                <h3>Estratégias Implementadas</h3>
+                <ul>
+                    <li>
+                        <strong>Validação Rigorosa:</strong> Validação completa
+                        de dados antes do envio à API
+                    </li>
+                    <li>
+                        <strong>Logs Detalhados:</strong> Registro estruturado
+                        de todas as operações e erros
+                    </li>
+                    <li>
+                        <strong>Timeout e Retry:</strong> Configuração de
+                        timeouts e política de tentativas
+                    </li>
+                    <li>
+                        <strong>Circuit Breaker:</strong> Proteção contra falhas
+                        em cascata
+                    </li>
+                    <li>
+                        <strong>Notificações:</strong> Alertas em tempo real
+                        para falhas críticas
+                    </li>
+                </ul>
+
+                <div class="info-card">
+                    <h4>Tipos de Erros Tratados</h4>
+                    <table class="error-table">
+                        <tr>
+                            <th>Categoria</th>
+                            <th>Exemplos</th>
+                            <th>Estratégia</th>
+                        </tr>
+                        <tr>
+                            <td>Validação</td>
+                            <td>
+                                Dados inválidos, falta de campos obrigatórios
+                            </td>
+                            <td>Validação prévia, feedback imediato</td>
+                        </tr>
+                        <tr>
+                            <td>Comunicação</td>
+                            <td>Timeout, rede indisponível</td>
+                            <td>Retry com backoff exponencial</td>
+                        </tr>
+                        <tr>
+                            <td>Regras de Negócio</td>
+                            <td>Capacidade excedida, produto indisponível</td>
+                            <td>Mensagens amigáveis, alternativas</td>
+                        </tr>
+                        <tr>
+                            <td>Sistema</td>
+                            <td>Erros internos, falhas de serviço</td>
+                            <td>Fallback, degradação graciosa</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="column">
+                <h3>Implementação de Circuit Breaker</h3>
+                <div class="code-example-container">
+                    <div class="code-scroll-container">
+                        <pre
+                            class="code-block"
+                        >
+// Configuração do Circuit Breaker
+const circuitBreakerOptions = {
+    failureThreshold: 0.5,     // 50% de falhas abre o circuito
+    resetTimeout: 30000,       // 30 segundos até tentativa de reset
+    timeout: 10000,            // Timeout para operações individuais
+    fallback: async (error, args) => {
+        // Função de fallback quando o circuito está aberto
+        logger.warn('Circuit open, using fallback', {
+            service: 'fareharbor',
+            operation: args?.operation || 'unknown',
+            error: error.message
+        });
+        
+        // Verificar cache ou usar estratégia alternativa
+        return fallbackService.getFromCache(args);
+    }
+};
+
+// Aplicação do Circuit Breaker
+const protectedFareHarborClient = circuitBreaker(
+    fareHarborClient,
+    circuitBreakerOptions
+);
+
+// Uso com tratamento de erro específico
+try {
+    const result = await protectedFareHarborClient.getAvailabilities({
+        itemId: '12345',
+        date: '2025-03-01'
+    });
+    return result;
+} catch (error) {
+    if (error instanceof CircuitOpenError) {
+        // O circuito está aberto devido a muitas falhas
+        notifyOperations('FareHarbor API circuit open');
+        throw new ServiceUnavailableError();
+    }
+    
+    if (error instanceof TimeoutError) {
+        // A operação excedeu o timeout
+        throw new ResponseTimeoutError();
+    }
+    
+    // Outros erros
+    throw new ExternalApiError(error.message);
+}</pre
+                        >
+                    </div>
+                </div>
+
+                <div class="implementation-notes">
+                    <h4>Monitoramento</h4>
+                    <p>
+                        Implementamos dashboards em tempo real que acompanham:
+                    </p>
+                    <ul>
+                        <li>Taxa de sucesso das operações</li>
+                        <li>Tempo médio de resposta</li>
+                        <li>Estado do circuit breaker</li>
+                        <li>Utilização de fallbacks</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

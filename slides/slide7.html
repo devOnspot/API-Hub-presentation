@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Implementation - Booking System</title>
+</head>
+<body>
+    <div class="slide-content">
+        <h2>Implementation - Booking System</h2>
+        
+        <div class="implementation-container">
+            <!-- Improved flow diagram with HTML and CSS instead of SVG -->
+            <div class="booking-flow-diagram">
+                <!-- Horizontal main flow -->
+                <div class="flow-row">
+                    <div class="flow-block primary">Order Receipt</div>
+                    <div class="flow-connector"></div>
+                    <div class="flow-block secondary">Data Validation</div>
+                    <div class="flow-connector"></div>
+                    <div class="flow-block secondary">Routing</div>
+                    <div class="flow-connector"></div>
+                    <div class="flow-block secondary">Response Processing</div>
+                    <div class="flow-connector"></div>
+                    <div class="flow-block primary">Confirmation</div>
+                </div>
+                
+                <!-- Vertical connector from Routing to APIs -->
+                <div class="routing-down"></div>
+                
+                <!-- APIs (secondary flow) -->
+                <div class="flow-apis">
+                    <div class="flow-block internal-api">
+                        Internal API
+                        <div class="api-connector connector-internal"></div>
+                    </div>
+                    
+                    <div class="flow-block external-api">
+                        FareHarbor API
+                        <div class="api-connector connector-external"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="flex-container">
+                <div class="column">
+                    <h3>Challenges Overcome</h3>
+                    <ul>
+                        <li><strong>Different Required Fields:</strong> Dynamic field mapping between APIs</li>
+                        <li><strong>Bidirectional Validation:</strong> Client data validation and external API response verification</li>
+                        <li><strong>Error Handling:</strong> Robust system for capturing and translating errors</li>
+                        <li><strong>Booking Confirmation:</strong> Automatic booking status verification system</li>
+                    </ul>
+                </div>
+                <div class="column">
+                    <h3>Error Handling</h3>
+                    <div class="code-example-container">
+                        <div class="code-scroll-container">
+                            <pre class="code-block">
+try {
+    // Integration code for booking
+    const bookingResponse = await fareHarborService.createBooking(bookingData);
+    return mapFareHarborBookingToOctoBooking(bookingResponse);
+} catch (error) {
+    if (axios.isAxiosError(error)) {
+        // Specific handling for HTTP errors
+        throw new FareHarborError(
+            error.response?.status || 500,
+            error.response?.data?.error || 'UNKNOWN_ERROR',
+            error.response?.data?.message || 'Error processing booking'
+        );
+    }
+    
+    // Other types of errors
+    logger.error('Booking error', {
+        error: error.message,
+        bookingData: sanitizeBookingData(bookingData),
+        timestamp: new Date().toISOString()
+    });
+    
+    throw new BookingError('PROCESSING_ERROR', 'Error processing booking');
+}</pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

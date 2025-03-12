@@ -1,0 +1,302 @@
+<div class="slide-content">
+    <h2>Development Pipeline</h2>
+
+    <div class="pipeline-container">
+        <div class="pipeline-diagram">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 180">
+                <!-- Elementos do diagrama da pipeline -->
+                <defs>
+                    <marker
+                        id="arrowhead-pipeline"
+                        markerWidth="10"
+                        markerHeight="7"
+                        refX="9"
+                        refY="3.5"
+                        orient="auto"
+                    >
+                        <polygon points="0 0, 10 3.5, 0 7" fill="#333" />
+                    </marker>
+                </defs>
+
+                <!-- Etapas da Pipeline -->
+                <rect
+                    x="50"
+                    y="60"
+                    width="100"
+                    height="60"
+                    rx="5"
+                    fill="#4285f4"
+                    opacity="0.8"
+                />
+                <text
+                    x="100"
+                    y="90"
+                    text-anchor="middle"
+                    fill="white"
+                    font-weight="bold"
+                >
+                    Code
+                </text>
+                <text
+                    x="100"
+                    y="110"
+                    text-anchor="middle"
+                    fill="white"
+                    font-size="12"
+                >
+                    Git
+                </text>
+
+                <rect
+                    x="200"
+                    y="60"
+                    width="100"
+                    height="60"
+                    rx="5"
+                    fill="#4285f4"
+                    opacity="0.8"
+                />
+                <text
+                    x="250"
+                    y="90"
+                    text-anchor="middle"
+                    fill="white"
+                    font-weight="bold"
+                >
+                    Build
+                </text>
+                <text
+                    x="250"
+                    y="110"
+                    text-anchor="middle"
+                    fill="white"
+                    font-size="12"
+                >
+                    GitHub Actions
+                </text>
+
+                <rect
+                    x="350"
+                    y="60"
+                    width="100"
+                    height="60"
+                    rx="5"
+                    fill="#4285f4"
+                    opacity="0.8"
+                />
+                <text
+                    x="400"
+                    y="90"
+                    text-anchor="middle"
+                    fill="white"
+                    font-weight="bold"
+                >
+                    Tests
+                </text>
+                <text
+                    x="400"
+                    y="110"
+                    text-anchor="middle"
+                    fill="white"
+                    font-size="12"
+                >
+                    Jest
+                </text>
+
+                <rect
+                    x="500"
+                    y="60"
+                    width="100"
+                    height="60"
+                    rx="5"
+                    fill="#4285f4"
+                    opacity="0.8"
+                />
+                <text
+                    x="550"
+                    y="90"
+                    text-anchor="middle"
+                    fill="white"
+                    font-weight="bold"
+                >
+                    Deploy
+                </text>
+                <text
+                    x="550"
+                    y="110"
+                    text-anchor="middle"
+                    fill="white"
+                    font-size="12"
+                >
+                    Automated CD
+                </text>
+
+                <rect
+                    x="650"
+                    y="60"
+                    width="100"
+                    height="60"
+                    rx="5"
+                    fill="#4285f4"
+                    opacity="0.8"
+                />
+                <text
+                    x="700"
+                    y="90"
+                    text-anchor="middle"
+                    fill="white"
+                    font-size="13"
+                    font-weight="bold"
+                >
+                    Monitoring
+                </text>
+                <text
+                    x="700"
+                    y="110"
+                    text-anchor="middle"
+                    fill="white"
+                    font-size="11"
+                >
+                    Logs
+                </text>
+
+                <!-- Setas de conexão -->
+                <line
+                    x1="150"
+                    y1="90"
+                    x2="200"
+                    y2="90"
+                    stroke="#333"
+                    stroke-width="2"
+                    marker-end="url(#arrowhead-pipeline)"
+                />
+                <line
+                    x1="300"
+                    y1="90"
+                    x2="350"
+                    y2="90"
+                    stroke="#333"
+                    stroke-width="2"
+                    marker-end="url(#arrowhead-pipeline)"
+                />
+                <line
+                    x1="450"
+                    y1="90"
+                    x2="500"
+                    y2="90"
+                    stroke="#333"
+                    stroke-width="2"
+                    marker-end="url(#arrowhead-pipeline)"
+                />
+                <line
+                    x1="600"
+                    y1="90"
+                    x2="650"
+                    y2="90"
+                    stroke="#333"
+                    stroke-width="2"
+                    marker-end="url(#arrowhead-pipeline)"
+                />
+            </svg>
+        </div>
+
+        <div class="flex-container">
+            <div class="column">
+                <h3>GitHub Actions Workflow</h3>
+                <div class="code-example-container">
+                    <div class="code-scroll-container">
+                        <pre
+                            class="code-block"
+                        >
+name: CI/CD Pipeline API HUB
+
+on:
+    push:
+    branches: [ main ]
+    pull_request:
+    branches: [ main ]
+
+jobs:
+    build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+        node-version: '20.x'
+        
+    - name: Install dependencies
+        run: npm install
+        
+    - name: Run tests
+        env:
+        DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        run: npm test
+        
+    deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    
+    steps:
+    - name: Deploy to VPS
+        uses: appleboy/ssh-action@master
+        with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        key: ${{ secrets.SSH_KEY }}
+        script: |
+            cd ~/API-Hub
+            git pull origin main
+            npm install
+            npm run build          
+            pm2 stop api-hub
+            pm2 delete api-hub
+            npm cache clean --force
+            rm -rf node_modules
+            npm install
+            pm2 restart api-hub || pm2 start dist/server.js --name api-hub</pre
+                        >
+                    </div>
+                </div>
+            </div>
+            <div class="column">
+                <h3>Infrastructure</h3>
+                <div class="infrastructure-highlights">
+                    <div class="infra-item">
+                        <h4>Repository</h4>
+                        <ul>
+                            <li>GitHub repository with branch protection</li>
+                            <li>Mandatory Pull Requests</li>
+                        </ul>
+                    </div>
+
+                    <div class="infra-item">
+                        <h4>Production Server</h4>
+                        <ul>
+                            <li>Linux Server (Debian)</li>
+                            <li>Node.js process managed by PM2</li>
+                            <li>Nginx as reverse proxy</li>
+                            <li>
+                                SSL/TLS certificates with automatic renewal
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="infra-item">
+                        <h4>Database</h4>
+                        <ul>
+                            <li>Supabase for structured data</li>
+                            <li>
+                                Bubble for purchase order storage
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
